@@ -35,7 +35,7 @@ def generate_launch_description():
 
     publish_rate_arg = DeclareLaunchArgument(
         "publish_rate",
-        default_value="3.0",
+        default_value="15.0",
         description="Rate in Hz to publish MCM heartbeat and diagnostics",
     )
 
