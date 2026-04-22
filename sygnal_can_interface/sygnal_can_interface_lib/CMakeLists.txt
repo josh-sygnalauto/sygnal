@@ -32,6 +32,7 @@ add_library(
   src/crc8.cpp
   src/sygnal_mcm_interface.cpp
   src/sygnal_command_interface.cpp
+  src/sygnal_cbfd_interface.cpp
   src/sygnal_interface_socketcan.cpp
 )
 
@@ -104,6 +105,22 @@ if(BUILD_TESTING)
     COMMAND "$<TARGET_FILE:sygnal_command_interface_tests>"
       -r junit -s
       -o test_results/${PROJECT_NAME}/sygnal_command_interface_tests_output.xml
+    ENV CATCH_CONFIG_CONSOLE_WIDTH=120
+    WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+  )
+
+  add_executable(sygnal_cbfd_interface_tests
+    test/test_sygnal_cbfd_interface.cpp
+  )
+  target_link_libraries(sygnal_cbfd_interface_tests
+    PRIVATE ${PROJECT_NAME} Catch2::Catch2WithMain
+  )
+  ament_add_test(
+    sygnal_cbfd_interface_tests
+    GENERATE_RESULT_FOR_RETURN_CODE_ZERO
+    COMMAND "$<TARGET_FILE:sygnal_cbfd_interface_tests>"
+      -r junit -s
+      -o test_results/${PROJECT_NAME}/sygnal_cbfd_interface_tests_output.xml
     ENV CATCH_CONFIG_CONSOLE_WIDTH=120
     WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
   )
